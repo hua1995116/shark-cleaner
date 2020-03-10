@@ -1,0 +1,22 @@
+{
+  "name": "clean-node-pkg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "hua1995116 <qiufneghyf@gmail.com> (https://github.com/hua1995116)",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.11.0",
+    "load-json-file": "^6.2.0",
+    "nodejs-fs-utils": "^1.2.4",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.0",
+    "typescript": "^3.8.3"
+  }
+}
