@@ -1,1 +1,1 @@
-export declare function byteConvert(bytes: number): string;
+export declare function byteConvert(bytes: any): string;

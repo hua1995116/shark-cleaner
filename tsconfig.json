@@ -8,7 +8,8 @@
     "outDir": "./dist",
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "declarationDir": "./types"
+    "declarationDir": "./types",
+    "downlevelIteration": true
   },
   "exclude": ["node_modules", "dist"],
   "include": ["src/**/*.ts"]

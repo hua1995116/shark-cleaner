@@ -1,0 +1,78 @@
+.WavePro {
+  width: 180px;
+  height: 180px;
+  border: 2px solid #1B9AF7;
+  background: #222;
+  border-radius: 50%;
+  margin: 0px auto;
+  mask-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAACklEQVQI12NgAAAAAgAB4iG8MwAAAABJRU5ErkJggg==");
+  font-size: 30px;
+  text-align: center;
+  line-height: 172px;
+  font-weight: bold;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.WavePro2 {
+  display: inline-block;
+  margin: 10px 15px;
+}
+.WavePro p {
+  position: relative;
+  z-index: 2;
+  display: inline;
+}
+.WavePro span {
+  font-size: 30px;
+}
+.WavePro .turn {
+  background: rgba(76, 176, 249, 0.7);
+  border-radius: 40%;
+  height: 200%;
+  left: -50%;
+  position: absolute;
+  width: 200%;
+  top: 33%;
+  z-index: 1;
+  animation: spin 5s infinite linear;
+  -moz-animation: spin 5s infinite linear;
+  -webkit-animation: spin 5s infinite linear;
+}
+.WavePro .glare {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  height: 200%;
+  left: -120%;
+  position: absolute;
+  top: -120%;
+  transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  width: 200%;
+  z-index: 5;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,152 @@
+.common-wrapper {
+  box-shadow: 0px 0 5px 5px #ddd;
+  margin: 20px auto;
+  padding: 1px;
+  // overflow: hidden;
+}
+
+html {
+  font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+li {
+  list-style: none;
+}
+ul, p {
+  margin: 0;
+  padding: 0;
+}
+.button {
+  color: #666;
+  background-color: #EEE;
+  border-color: #EEE;
+  font-weight: 300;
+  font-size: 16px;
+  font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  text-decoration: none;
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  padding: 0 40px;
+  margin: 0;
+  display: inline-block;
+  appearance: none;
+  cursor: pointer;
+  border: none;
+  box-sizing: border-box;
+  transition-property: all;
+  transition-duration: .3s;
+}
+
+.button-primary {
+  background-color: #1B9AF7;
+  border-color: #1B9AF7;
+  color: #FFF;
+  &:hover {
+    background-color: #4cb0f9;
+    border-color: #4cb0f9;
+    color: #FFF;
+  }
+}
+
+
+.button-large {
+  font-size: 20px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 50px;
+}
+
+
+.main-btn {
+  width: 200px;
+  display: block;
+  padding: 0;
+  margin: 20px auto;
+}
+
+.main-container {
+  width: 400px;
+  height: 600px;
+  .common-wrapper;
+}
+
+.detail-container {
+  .common-wrapper;
+  width: 740px;
+  padding: 20px 40px;
+}
+
+.main-body {
+  margin-top: 220px;
+}
+
+.main-title {
+  font-size: 24px;
+  text-align: center;
+  height: 45px;
+  line-height: 45px;
+  color: #333;
+}
+
+.main-tip {
+  text-align: center;
+  font-size: 14px;
+  color: #6b6b6b;
+}
+
+.scanner-dir {
+  margin: 20px 30px;
+  text-align: center;
+  &__label {
+    width: 80px;
+  }
+  &__value {
+    color: #717171;
+  }
+  &__computed {
+    color: #717171;
+  }
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+  &__info {
+    width: 300px;
+    font-size: 30px;
+
+  }
+}
+
+.detail-list {
+  margin-top: 10px;
+  li {
+    height: 30px;
+    line-height: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__name {
+    margin-left: 10px;
+    color: #000;
+  }
+  &__desc {
+    color: #6b6b6b;
+    margin-left: 10px;
+  }
+}
+
+.detail-title {
+  &__name {
+    margin-left: 10px;
+    color: #1B9AF7;
+  }
+}
+
+.tip-p {
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+}
