@@ -95,11 +95,11 @@ function Detail(props) {
 
   const handleClean = () => {
     if (checkedList.length === 0) {
-      message.warning('至少选中一个文件进行清理');
+      message.warning(t('select_one'));
       return;
     }
     Modal.info({
-      title: '确认要清理以下文件?',
+      title: t('select_confirm'),
       maskClosable: true,
       content: (
         <div>
@@ -127,8 +127,8 @@ function Detail(props) {
     <div className="detail-container">
       <div className="detail-header">
         <div className="detail-header__info">
-          <span>共扫描到垃圾 {total}</span>
-          <Button size={'small'} onClick={() => location.href="/"}>返回</Button>
+          <span>{t('total_cache')} {total}</span>
+          <Button size={'small'} onClick={() => location.href = "/"}>{t('back')}</Button>
         </div>
         <button className="button button-primary button-large" onClick={handleClean}>
           {t("clean")}
@@ -138,7 +138,7 @@ function Detail(props) {
         <h3 className="detail-title">
           <SettingTwoTone />
           <span className="detail-title__name">node_modules</span>
-          <span className="detail-title__select">已经选择<span>{byteConvert(selectSize)}</span></span>
+          <span className="detail-title__select">{t('already_select')}<span>{byteConvert(selectSize)}</span></span>
         </h3>
         <ul>
           {fileList.map(item => {
@@ -176,30 +176,30 @@ function Detail(props) {
         <h3 className="detail-title">
           <ExperimentTwoTone />
           <span className="detail-title__name">npm cache</span>
-          <span className="detail-title__select">已经选择<span>{byteConvert(0)}</span></span>
+          <span className="detail-title__select">{t('already_select')}<span>{byteConvert(0)}</span></span>
         </h3>
         <div>
-          开放中敬请期待
+          {t('developing')}
         </div>
       </div>
       <div className="detail-list">
         <h3 className="detail-title">
           <ThunderboltTwoTone />
           <span className="detail-title__name">yarn cache</span>
-          <span className="detail-title__select">已经选择<span>{byteConvert(0)}</span></span>
+          <span className="detail-title__select">{t('already_select')}<span>{byteConvert(0)}</span></span>
         </h3>
         <div>
-          开放中敬请期待
+          {t('developing')}
         </div>
       </div>
       <div className="detail-list">
         <h3 className="detail-title">
           <RestTwoTone />
           <span className="detail-title__name">nvm cache</span>
-          <span className="detail-title__select">已经选择<span>{byteConvert(0)}</span></span>
+          <span className="detail-title__select">{t('already_select')}<span>{byteConvert(0)}</span></span>
         </h3>
         <div>
-          开放中敬请期待
+          {t('developing')}
         </div>
       </div>
     </div>

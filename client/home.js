@@ -13,14 +13,10 @@ function Home(props) {
   const socket = props.socket;
   const [detail, setDetail] = useState("");
   const [isStart, setStart] = useState(false);
-  // const [isStart, setStart] = useState(true);
-  // const [detail, setDetail] = useState('/Users/huayifeng/my/test/antd/1zh16/select');
   const [isComputed, setComputed] = useState(false);
   const [cache, setCache] = useState([]);
   const [progress, setProgress] = useState(0);
   useEffect(() => {
-    // setComputed(true);
-    // setStart(true);
     socket.on("connect", () => {
       console.log('connected');
     });
@@ -48,7 +44,7 @@ function Home(props) {
     });
 
     socket.on("file-error", () => {
-      message.warning('无效路径, 请重新输入路径');
+      message.warning(t('file_error'));
       setTimeout(() => {
         location.href = '/';
       }, 1500);
@@ -102,7 +98,7 @@ function Home(props) {
             >
               {t("main_btn")}
             </button>
-            <Input className="main-path" placeholder="设置扫描路径" onChange={(e) => handlePath(e.target.value)}></Input>
+            <Input className="main-path" placeholder={t('set_scanner_path')} onChange={(e) => handlePath(e.target.value)}></Input>
           </>
         )}
         {isStart && (

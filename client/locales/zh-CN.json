@@ -4,5 +4,13 @@
   "main_btn": "开始扫描",
   "dir": "扫描目录",
   "computed": "正在计算大小",
-  "clean": "立即清理"
+  "clean": "立即清理",
+  "file_error": "无效路径, 请重新输入路径",
+  "set_scanner_path": "设置扫描路径",
+  "total_cache": "共扫描到垃圾",
+  "back": "返回",
+  "already_select": "已经选择",
+  "developing": "开放中敬请期待",
+  "select_one": "至少选中一个文件进行清理",
+  "select_confirm": "确认要清理以下文件?"
 }
