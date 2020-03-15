@@ -1,19 +1,30 @@
 {
-  "name": "clean-node-pkg",
+  "name": "node-cleaner",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/fsSystem.js",
   "scripts": {
     "build": "tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "cleaner",
+    "node_modules",
+    "clean"
+  ],
+  "bin": {
+    "node-cleaner": "./cli/index.js"
+  },
   "author": "hua1995116 <qiufneghyf@gmail.com> (https://github.com/hua1995116)",
   "license": "MIT",
   "dependencies": {
+    "colors": "^1.4.0",
+    "commander": "^5.0.0",
     "koa": "^2.11.0",
     "koa-static": "^5.0.0",
     "load-json-file": "^6.2.0",
+    "log-symbols": "^3.0.0",
     "nodejs-fs-utils": "^1.2.4",
+    "open": "^7.0.3",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
@@ -21,5 +32,8 @@
     "@types/node": "^13.9.0",
     "@types/socket.io": "^2.1.4",
     "typescript": "^3.8.3"
+  },
+  "engines": {
+    "node": ">=10.10.0"
   }
 }

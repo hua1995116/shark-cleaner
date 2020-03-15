@@ -1,34 +1,28 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import "./index.less";
 import Animate from "./animate";
 import Wave from "./wave";
+import { Input } from "antd";
 import { useTranslation } from "react-i18next";
-import io from "socket.io-client";
+import debounce from 'lodash/debounce';
 
-const uri = "http://localhost:8082";
-const options = {
-  transports: ["websocket"],
-  autoConnect: false
-};
 let count = 1;
 
-function Home() {
+function Home(props) {
   const { t } = useTranslation();
   // const [socket] = useSocket(uri, options);
-  const socket = useMemo(() => {
-    return io(uri, options);
-  }, []);
+  const socket = props.socket;
   const [detail, setDetail] = useState("");
   const [isStart, setStart] = useState(false);
   // const [isStart, setStart] = useState(true);
   // const [detail, setDetail] = useState('/Users/huayifeng/my/test/antd/1zh16/select');
-  const [isComputed, setComputed] = useState(true);
+  const [isComputed, setComputed] = useState(false);
   const [cache, setCache] = useState([]);
   const [progress, setProgress] = useState(0);
-
   useEffect(() => {
+    // setComputed(true);
+    // setStart(true);
     console.log("first");
-    socket.connect();
     socket.on("connect", () => {
       console.log(111);
     });
@@ -38,6 +32,8 @@ function Home() {
     });
 
     socket.on("scannerDone", () => {
+      console.log('set computed')
+      setComputed(true);
       setProgress(50);
     });
 
@@ -46,9 +42,10 @@ function Home() {
       setProgress(tempPagoress);
     });
 
-    socket.on("done", file => {
+    socket.on("done", list => {
       setProgress(100);
-      console.log(file);
+      window.list = list;
+      location.href = '#/detail';
     });
   }, []);
 
@@ -67,6 +64,10 @@ function Home() {
     };
   }, [cache]);
 
+  const handlePath = useCallback(debounce(e => {
+    socket.emit('setPath', e);
+  }, 500), []);
+
   const handleScanner = () => {
     setStart(true);
     socket.emit("scanner");
@@ -80,6 +81,7 @@ function Home() {
     }
     return text;
   };
+  console.log(isComputed, '===');
 
   return (
     <div className="main-container">
@@ -88,12 +90,15 @@ function Home() {
         <div className="main-title">{t("title")}</div>
         <div className="main-tip">{t("tip")}</div>
         {!isStart && (
-          <button
-            onClick={handleScanner}
-            className="main-btn button button-primary button-large"
-          >
-            {t("main_btn")}
-          </button>
+          <>
+            <button
+              onClick={handleScanner}
+              className="main-btn button button-primary button-large"
+            >
+              {t("main_btn")}
+            </button>
+            <Input className="main-path" placeholder="设置扫描路径" onChange={(e) => handlePath(e.target.value)}></Input>
+          </>
         )}
         {isStart && (
           <>

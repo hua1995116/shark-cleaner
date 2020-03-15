@@ -1,28 +1,35 @@
-
 const Koa = require('koa');
 const Socket = require('socket.io');
 const http = require('http');
 const serve = require('koa-static');
-const os = require('os');
 const child = require('child_process');
 const path = require('path');
 
 class ClearNode {
-  constructor(path) {
+  constructor(options) {
     this.server = null;
-    this.path = path || os.homedir();
-    this.run();
+    this.options = options;
+    // this.run();
   }
-  run() {
+  run(cb) {
     const app = new Koa();
+    // app.use(async (ctx, next) => {
+    //   await next();
+    // })
     app.use(serve('client-dist'));
-    this.server = app.listen(8082);
+    this.server = app.listen(this.options.port, cb);
     const io = Socket(this.server, { origins: '*:*' });
     let self = this;
     // // 启动一个 websocket服务器，然后等待连接来到，连接到来之后socket
     let sockets = [];
-    const system = child.fork(path.join(__dirname, '../dist', 'run.js'));
+    const system = child.fork(path.join(__dirname, 'run.js'), [JSON.stringify(this.options)]);
 
+    system.on('exit', () => {
+      console.log('exit argument==', arguments);
+    })
+    system.on('error', () => {
+      console.log('error argument==', arguments);
+    })
     system.on('message', (m) => {
       console.log('PARENT got message:', m);
       switch (m.type) {
@@ -89,6 +96,12 @@ class ClearNode {
         //   socket.emit('file', '/qwe/eqw');
         // }, 50);
       })
+      socket.on('setPath', (path) => {
+        system.send({ type: 'setPath', data: path });
+      })
+      socket.on('delete', (path) => {
+        system.send({ type: 'delete', data: path });
+      })
     });
 
     // self.systemIntance.on('file', (filename) => {
@@ -107,5 +120,7 @@ class ClearNode {
   // }
 }
 
-let server = new ClearNode('/Users/huayifeng/my/test/iframe');
+module.exports = ClearNode;
+
+// let server = new ClearNode('/Users/huayifeng/my/test/iframe');
 // server.listen(8082);

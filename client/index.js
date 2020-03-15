@@ -1,17 +1,33 @@
-import React, { Suspense } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import "./i18n";
 import 'normalize.css/normalize.css';
 import Home from './home';
 import Detail from './detail';
+import io from "socket.io-client";
+
+const uri = "http://localhost:8082";
+const options = {
+  transports: ["websocket"],
+  autoConnect: false
+};
 
 function App() {
+  const socket = useMemo(() => {
+    return io(uri, options);
+  }, []);
+  useEffect(() => {
+    socket.connect();
+    return () => {
+      socket.disconnect();
+    }
+  }, [])
   return (
     <>
       <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/detail" component={Detail} exact />
+        <Route path="/" component={() => (<Home socket={socket}/>)} exact />
+        <Route path="/detail" component={() => (<Detail socket={socket}/>)} exact />
       </Switch>
     </>
   )

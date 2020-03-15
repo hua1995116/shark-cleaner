@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel index.html",
-    "build": "parcel build index.html -d ../server/dist --public-url /dist/ --no-source-maps && cp ../server/dist/index.html ../server/layout/ ",
+    "build": "rm -rf ../client-dist/* && parcel build index.html -d ../client-dist --no-source-maps",
     "watch": "npx parcel watch index.html -d ../client-dist"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "antd": "^4.0.2",
     "i18next": "^19.3.2",
     "i18next-browser-languagedetector": "^4.0.2",
+    "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
     "rc-checkbox": "^2.1.8",
     "rc-collapse": "^1.11.8",

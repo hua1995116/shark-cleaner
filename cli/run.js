@@ -1,10 +1,14 @@
-import fsSystem from './fsSystem';
+const fsSystem = require('../dist/fsSystem').default;
 
-const systemIntance = new fsSystem('/Users/huayifeng/my/test');
+const options = JSON.parse(process.argv[2]) || {};
+
+console.log('options', options);
+
+const systemIntance = new fsSystem(options);
 let setList = new Set();
 // 启动一个 websocket服务器，然后等待连接来到，连接到来之后socket
 systemIntance.on('file', (filename) => {
-  console.log('filename==', filename);
+  // console.log('filename==', filename);
   if (setList.size === 20) {
     process.send({type: 'file', data: [...setList]})
     setList.clear();
@@ -22,8 +26,14 @@ systemIntance.on('scannerDone', () => {
   process.send({type: 'scannerDone'})
 })
 
-process.on('message', (data) => {
-  if (data.type === 'start') {
+process.on('message', (m) => {
+  if (m.type === 'start') {
     systemIntance.run();
+  }
+  if (m.type === 'setPath') {
+    systemIntance.setWorkPath(m.data);
+  }
+  if (m.type === 'delete') {
+    systemIntance.delete(m.data);
   }
 })

@@ -4,7 +4,12 @@
   padding: 1px;
   // overflow: hidden;
 }
-
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: content-box !important;
+          box-sizing: content-box !important;
+}
 html {
   font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
@@ -88,6 +93,12 @@ ul, p {
   color: #333;
 }
 
+.main-path {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+}
+
 .main-tip {
   text-align: center;
   font-size: 14px;
@@ -114,9 +125,14 @@ ul, p {
   border-bottom: 1px solid #ddd;
   padding-bottom: 20px;
   &__info {
-    width: 300px;
+    width: 400px;
     font-size: 30px;
-
+    span {
+      vertical-align: middle;
+    }
+    button {
+      margin-left: 10px;
+    }
   }
 }
 
@@ -136,12 +152,25 @@ ul, p {
     color: #6b6b6b;
     margin-left: 10px;
   }
+  &__info {
+    margin-left: 5px;
+    cursor: pointer;
+  }
 }
 
 .detail-title {
   &__name {
     margin-left: 10px;
     color: #1B9AF7;
+  }
+  &__select {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    span {
+      margin-left: 5px;
+      color: #f4c67a;
+    }
   }
 }
 
