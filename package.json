@@ -1,6 +1,6 @@
 {
-  "name": "node-cleaner",
-  "version": "1.0.0",
+  "name": "shark-cleaner",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/fsSystem.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "clean"
   ],
   "bin": {
-    "node-cleaner": "./cli/index.js"
+    "shark": "./cli/index.js"
   },
   "author": "hua1995116 <qiufneghyf@gmail.com> (https://github.com/hua1995116)",
   "license": "MIT",

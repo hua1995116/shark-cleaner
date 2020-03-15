@@ -2,7 +2,7 @@ const fsSystem = require('../dist/fsSystem').default;
 
 const options = JSON.parse(process.argv[2]) || {};
 
-console.log('options', options);
+console.log('info', options);
 
 const systemIntance = new fsSystem(options);
 let setList = new Set();
@@ -24,6 +24,18 @@ systemIntance.on('done', (fileList) => {
 });
 systemIntance.on('scannerDone', () => {
   process.send({type: 'scannerDone'})
+})
+systemIntance.on('delete-start', () => {
+  process.send({type: 'delete-start'})
+})
+systemIntance.on('delete-file', (path) => {
+  process.send({type: 'delete-file', data: path})
+})
+systemIntance.on('delete-done', () => {
+  process.send({type: 'delete-done'})
+})
+systemIntance.on('file-error', () => {
+  process.send({type: 'file-error'})
 })
 
 process.on('message', (m) => {

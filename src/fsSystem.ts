@@ -23,11 +23,13 @@ class FsSystem extends events.EventEmitter {
   public workPath: string;
   public projectTree: ProjectInfo[];
   public ignoreList: string[];
+  private isRemove: boolean;
   constructor(options?: Options) {
     super();
     this.workPath = options.path;
     this.ignoreList = options.ignore.concat(IGNORE_FILES);
     this.projectTree = [];
+    this.isRemove = false;
   }
   abort() {
 
@@ -51,6 +53,18 @@ class FsSystem extends events.EventEmitter {
   emitComputed(project) {
     this.emit('computed', project);
   }
+  emitDeleteStart() {
+    this.emit('delete-start');
+  }
+  emitDeleteFile(path) {
+    this.emit('delete-file', path);
+  }
+  emitDeleteDone() {
+    this.emit('delete-done');
+  }
+  emitErrorFile() {
+    this.emit('file-error');
+  }
   scannerCallback() {
     this.emitScanner();
     const total = this.projectTree.length;
@@ -69,6 +83,11 @@ class FsSystem extends events.EventEmitter {
     this.projectTree = [];
   }
   run() {
+    if (!fs.existsSync(this.workPath)) {
+      // judge file is exist
+      this.emitErrorFile();
+      return;
+    }
     // this.loopReadFile(this.workPath, this.scannerCallback.bind(this));
     this.loopReadFile2(this.workPath);
     this.scannerCallback();
@@ -116,14 +135,22 @@ class FsSystem extends events.EventEmitter {
     })
   }
   delete(pathList) {
+    if (this.isRemove) {
+      return;
+    }
+    this.isRemove = true;
+    this.emitDeleteStart();
     for (let i = 0; i < pathList.length; i++) {
       this.deleteFile(pathList[i]);
+      this.emitDeleteFile(pathList[i]);
     }
+    this.isRemove = false;
+    this.emitDeleteDone();
   }
   deleteFile(path) {
     if (fs.existsSync(path)) {
       const files = fs.readdirSync(path);
-      files.forEach(function (file, index) {
+      files.forEach((file, index) => {
         var curPath = path + "/" + file;
         if (fs.statSync(curPath).isDirectory()) {
           this.deleteFile(curPath);

@@ -13,9 +13,6 @@ class ClearNode {
   }
   run(cb) {
     const app = new Koa();
-    // app.use(async (ctx, next) => {
-    //   await next();
-    // })
     app.use(serve('client-dist'));
     this.server = app.listen(this.options.port, cb);
     const io = Socket(this.server, { origins: '*:*' });
@@ -60,29 +57,35 @@ class ClearNode {
           });
           break;
         }
+        case 'delete-start': {
+          sockets.forEach(item => {
+            item.emit('delete-start');
+          });
+          break;
+        }
+        case 'delete-file': {
+          const file = m.data;
+          sockets.forEach(item => {
+            item.emit('delete-file', file);
+          });
+          break;
+        }
+        case 'delete-done': {
+          const fileList = m.data;
+          sockets.forEach(item => {
+            item.emit('delete-done');
+          });
+          break;
+        }
+        case 'file-error': {
+          sockets.forEach(item => {
+            item.emit('file-error');
+          });
+          break;
+        }
       }
     });
-
-    // Causes the child to print: CHILD got message: { hello: 'world' }
-    // this.systemIntance = new fsSystem(this.path);
-    // self.systemIntance.on('file', (filename) => {
-    //   console.log(filename);
-    //   if (setList.size === 20) {
-    //     sockets.forEach(item => {
-    //       item.emit('file', [...setList]);
-    //     });
-    //     setList.clear();
-    //   }
-    //   setList.add(filename);
-    // });
-    // self.systemIntance.on('done', (fileList) => {
-    //   sockets.forEach(item => {
-    //     item.emit('done', fileList);
-    //   })
-    // });
-
     io.on("connection", socket => {
-      // sockets.push(socket);
       socket.emit("hash");
       // 再向客户端发送一个ok
       socket.emit("ok");
@@ -92,9 +95,6 @@ class ClearNode {
       socket.on('scanner', () => {
         console.log('recived scanner');
         system.send({ type: 'start' });
-        // setInterval(() => {
-        //   socket.emit('file', '/qwe/eqw');
-        // }, 50);
       })
       socket.on('setPath', (path) => {
         system.send({ type: 'setPath', data: path });
@@ -104,23 +104,7 @@ class ClearNode {
       })
     });
 
-    // self.systemIntance.on('file', (filename) => {
-    //   console.log('recived==', filename);
-    // });
-    // self.systemIntance.on('done', (fileList) => {
-    //   console.log('recived==', fileList);
-    // });
-    // self.systemIntance.run();
-    // console.log(systemIntance.projectTree);
   }
-  // listen(port) {
-  //   this.server.listen(port, () => {
-  //     console.log(`服务器已经在${port}端口上启动了`);
-  //   });
-  // }
 }
 
 module.exports = ClearNode;
-
-// let server = new ClearNode('/Users/huayifeng/my/test/iframe');
-// server.listen(8082);

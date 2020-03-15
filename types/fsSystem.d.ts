@@ -15,7 +15,8 @@ declare class FsSystem extends events.EventEmitter {
     workPath: string;
     projectTree: ProjectInfo[];
     ignoreList: string[];
-    constructor(options: Options);
+    private isRemove;
+    constructor(options?: Options);
     abort(): void;
     setWorkPath(path: any): void;
     emitError(): void;
@@ -23,6 +24,10 @@ declare class FsSystem extends events.EventEmitter {
     emitScanner(): void;
     emitdDone(): void;
     emitComputed(project: any): void;
+    emitDeleteStart(): void;
+    emitDeleteFile(path: any): void;
+    emitDeleteDone(): void;
+    emitErrorFile(): void;
     scannerCallback(): void;
     run(): void;
     loopReadFile(parPath: string, callback: Function): void;

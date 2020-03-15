@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import "./index.less";
 import Animate from "./animate";
 import Wave from "./wave";
-import { Input } from "antd";
+import { Input, message } from "antd";
 import { useTranslation } from "react-i18next";
 import debounce from 'lodash/debounce';
 
@@ -10,7 +10,6 @@ let count = 1;
 
 function Home(props) {
   const { t } = useTranslation();
-  // const [socket] = useSocket(uri, options);
   const socket = props.socket;
   const [detail, setDetail] = useState("");
   const [isStart, setStart] = useState(false);
@@ -22,9 +21,8 @@ function Home(props) {
   useEffect(() => {
     // setComputed(true);
     // setStart(true);
-    console.log("first");
     socket.on("connect", () => {
-      console.log(111);
+      console.log('connected');
     });
 
     socket.on("file", file => {
@@ -32,7 +30,7 @@ function Home(props) {
     });
 
     socket.on("scannerDone", () => {
-      console.log('set computed')
+      console.log('scannerDone');
       setComputed(true);
       setProgress(50);
     });
@@ -43,10 +41,18 @@ function Home(props) {
     });
 
     socket.on("done", list => {
+      console.log('done');
       setProgress(100);
       window.list = list;
       location.href = '#/detail';
     });
+
+    socket.on("file-error", () => {
+      message.warning('无效路径, 请重新输入路径');
+      setTimeout(() => {
+        location.href = '/';
+      }, 1500);
+    })
   }, []);
 
   useEffect(() => {
@@ -81,7 +87,6 @@ function Home(props) {
     }
     return text;
   };
-  console.log(isComputed, '===');
 
   return (
     <div className="main-container">
