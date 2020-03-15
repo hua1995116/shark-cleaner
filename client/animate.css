@@ -1,8 +1,7 @@
 .wrapper {
   position: absolute;
   left: 50%;
-  top: 200px;
-  /* transform: scale(1.5, 1.5) translate(-50%, -50%); */
+  top: 260px;
 }
 
 .floor {
@@ -492,3 +491,4 @@
     -webkit-transform: rotate(135deg) translate(-80%, 20%);
   }
 }
+

@@ -10,7 +10,7 @@
   "total_cache": "共扫描到垃圾",
   "back": "返回",
   "already_select": "已经选择",
-  "developing": "开放中敬请期待",
+  "developing": "开发中敬请期待",
   "select_one": "至少选中一个文件进行清理",
   "select_confirm": "确认要清理以下文件?"
 }

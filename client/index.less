@@ -20,6 +20,21 @@ ul, p {
   margin: 0;
   padding: 0;
 }
+.header {
+  height: 60px;
+}
+.header-tools {
+  cursor: pointer;
+  padding-top: 10px;
+  padding-right: 10px;
+  float: right;
+}
+
+.bottom {
+  height: 60px;
+  text-align: center;
+}
+
 .button {
   color: #666;
   background-color: #EEE;
@@ -125,7 +140,7 @@ ul, p {
   border-bottom: 1px solid #ddd;
   padding-bottom: 20px;
   &__info {
-    width: 400px;
+    width: 460px;
     font-size: 30px;
     span {
       vertical-align: middle;
@@ -182,4 +197,50 @@ ul, p {
   line-height: 20px;
   margin: 0;
   padding: 0;
+}
+
+.my-pay {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.my-pay-btn {
+  width: 60px;
+  height: 60px;
+  color: #fff;
+  background: #ea6f5a;
+  font-size: 18px;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
+.my-pay-type {
+  display: none;
+  width: 480px;
+  margin: 0 auto;
+}
+
+.my-pay-div {
+  width: 200px;
+  height: 250px;
+  margin-left: 20px;
+  margin-right: 20px;
+  overflow: hidden;
+  float: left;
+  background-size: 200px 300px;
+  background-repeat: no-repeat;
+}
+
+.my-pay-alipay {
+  background-image: url('http://picture-hyf.oss-cn-beijing.aliyuncs.com/IMG_2007.JPG');
+  background-position: 0 -59px;
+}
+
+.my-pay-weixin {
+  background-image: url('http://picture-hyf.oss-cn-beijing.aliyuncs.com/IMG_2006.JPG');
+  background-position: 0 0px;
 }

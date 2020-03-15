@@ -24,14 +24,14 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    lng: 'zh-CN',
-    fallbackLng: 'zh-CN',
+    // lng: 'zh-CN',
+    fallbackLng: localStorage.getItem('shark-language') ? localStorage.getItem('shark-language') : 'zh-CN',
     debug: false,
     resources: {
       en: {
         translation: en,
       },
-      ['zh-CN']: {
+      'zh-CN': {
         translation: zhCN,
       },
     },
@@ -41,5 +41,4 @@ i18n
     },
 });
 
-// i18n.changeLanguage('en-US');
 export default i18n;
