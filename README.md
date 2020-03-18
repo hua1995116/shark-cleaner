@@ -62,7 +62,7 @@ git clone https://github.com/hua1995116/shark-cleaner.git
 
 npm install
 
-node cli / index.js
+node cli/index.js
 ```
 another bash
 
