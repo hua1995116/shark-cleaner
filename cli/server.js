@@ -1,7 +1,7 @@
 const Koa = require('koa');
 const Socket = require('socket.io');
 const http = require('http');
-const serve = require('koa-static');
+const send = require('koa-send');
 const child = require('child_process');
 const path = require('path');
 
@@ -12,7 +12,9 @@ class ClearNode {
   }
   run(cb) {
     const app = new Koa();
-    app.use(serve('client-dist'));
+    app.use(async (ctx) => {
+      await send(ctx, ctx.path, { root: path.join(__dirname, '..', 'client-dist'), index: 'index.html' });
+    });
     this.server = app.listen(this.options.port, cb);
     const io = Socket(this.server, { origins: '*:*' });
     let self = this;
