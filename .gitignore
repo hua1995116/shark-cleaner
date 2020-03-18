@@ -64,3 +64,4 @@ dist
 package-lock.json
 test.js
 .cache
+client-dist

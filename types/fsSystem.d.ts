@@ -30,9 +30,7 @@ declare class FsSystem extends events.EventEmitter {
     emitErrorFile(): void;
     scannerCallback(): void;
     run(): void;
-    loopReadFile(parPath: string, callback: Function): void;
-    delete(pathList: any): void;
-    deleteFile(path: any): void;
+    delete(pathList: any): Promise<void>;
     loopReadFile2(parPath: string): void;
     isNodeProject(list: string[], pkgDir: string): Boolean;
     isIncludePkg(list: any): any;

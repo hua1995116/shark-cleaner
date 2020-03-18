@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as loadPkg from 'load-json-file';
 import { PKG_NAME, NODE_MODULES, IGNORE_FILES } from './constant';
 import { byteConvert } from './shared';
+import * as del from 'del';
 import * as events from 'events';
 
 interface ProjectInfo {
@@ -41,7 +42,7 @@ class FsSystem extends events.EventEmitter {
 
   }
   emitFile(filename) {
-    console.log('filename==', filename);
+    console.log('filename', filename);
     this.emit('file', filename);
   }
   emitScanner() {
@@ -88,84 +89,36 @@ class FsSystem extends events.EventEmitter {
       this.emitErrorFile();
       return;
     }
-    // this.loopReadFile(this.workPath, this.scannerCallback.bind(this));
     this.loopReadFile2(this.workPath);
     this.scannerCallback();
   }
-  loopReadFile(parPath: string, callback: Function) {
-    const self = this;
-    self.emitFile(parPath);
-    fs.readdir(parPath, { withFileTypes: true }, function (err, dirs) {
-      if (err) {
-        console.log(err);
-        callback();
-        return;
-      }
-      let count = 0
-      const checkEnd = function () {
-        ++count == dirs.length && callback()
-      }
-
-      const strDir = dirs.map(item => item.name);
-      if (self.isNodeProject(strDir, parPath)) {
-        const pkgJSON = self.getPkgObj(path.join(parPath, PKG_NAME));
-        const projectInfo: ProjectInfo = {
-          path: parPath,
-          desc: pkgJSON.description || '',
-          author: JSON.stringify(pkgJSON.author || ''),
-          size: 0,
-          formatSize: ''
-        }
-        self.projectTree.push(projectInfo);
-      }
-
-      dirs.forEach(function (item) {
-        const curPath = path.join(parPath, item.name);
-        if (item.isSymbolicLink()) {
-          return;
-        }
-        if (item.isDirectory() && !item.name.includes(NODE_MODULES) && !self.ignoreList.includes(item.name)) {
-          return self.loopReadFile(curPath, checkEnd);
-        }
-        checkEnd()
-      })
-
-      //为空时直接回调
-      dirs.length === 0 && callback()
-    })
-  }
-  delete(pathList) {
+  async delete(pathList) {
     if (this.isRemove) {
       return;
     }
     this.isRemove = true;
     this.emitDeleteStart();
     for (let i = 0; i < pathList.length; i++) {
-      this.deleteFile(pathList[i]);
-      this.emitDeleteFile(pathList[i]);
+      try {
+        await del([pathList[i]], { force: true });
+        this.emitDeleteFile(pathList[i]);
+      } catch (e) {
+
+      }
     }
     this.isRemove = false;
     this.emitDeleteDone();
   }
-  deleteFile(path) {
-    if (fs.existsSync(path)) {
-      const files = fs.readdirSync(path);
-      files.forEach((file, index) => {
-        var curPath = path + "/" + file;
-        if (fs.statSync(curPath).isDirectory()) {
-          this.deleteFile(curPath);
-        } else {
-          fs.unlinkSync(curPath);
-        }
-      });
-      fs.rmdirSync(path);
-    }
-  }
   loopReadFile2(parPath: string) {
     this.emitFile(parPath);
-    const dirs = fs.readdirSync(parPath, {
-      withFileTypes: true
-    });
+    let dirs = [];
+    try {
+      dirs = fs.readdirSync(parPath, {
+        withFileTypes: true
+      });
+    } catch (e) {
+      console.error(e);
+    }
     const strDir = dirs.map(item => item.name);
     if (this.isNodeProject(strDir, parPath)) {
       const pkgJSON = this.getPkgObj(path.join(parPath, PKG_NAME));

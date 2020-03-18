@@ -9,7 +9,6 @@ class ClearNode {
   constructor(options) {
     this.server = null;
     this.options = options;
-    // this.run();
   }
   run(cb) {
     const app = new Koa();
