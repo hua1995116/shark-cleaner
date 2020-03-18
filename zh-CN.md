@@ -15,6 +15,8 @@
 
 ## 使用
 
+Node 版本大于等于 10.10.0
+
 ```bash
 npm install -g node-shark
 

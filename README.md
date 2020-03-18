@@ -15,6 +15,8 @@ The origin of this project is because my computer has insufficient disks. I used
 
 ## Usage
 
+Node >= 10.10.0
+
 ```bash
 npm install -g node-shark
 
