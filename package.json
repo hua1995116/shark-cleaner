@@ -1,10 +1,10 @@
 {
   "name": "shark-cleaner",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A cleaning tool to help you quickly clear cache garbage.",
   "main": "dist/fsSystem.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cd client && npm run build",
     "update": "auto-vers -t"
   },
   "keywords": [
@@ -15,7 +15,15 @@
   "bin": {
     "shark": "./cli/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hua1995116/shark-cleaner.git"
+  },
   "author": "hua1995116 <qiufneghyf@gmail.com> (https://github.com/hua1995116)",
+  "bugs": {
+    "url": "https://github.com/hua1995116/shark-cleaner/issues"
+  },
+  "homepage": "https://github.com/hua1995116/shark-cleaner#readme",
   "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",
