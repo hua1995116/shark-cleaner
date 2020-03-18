@@ -6,6 +6,12 @@
 
 [English](./README.md)
 
+<p align="center">
+    <a href="https://npmcharts.com/compare/shark-cleaner?minimal=true" rel="nofollow"><img src="https://img.shields.io/npm/dm/shark-cleaner.svg" style="max-width:100%;"></a>
+    <a href="https://www.npmjs.com/package/shark-cleaner" rel="nofollow"><img src="https://img.shields.io/npm/v/shark-cleaner.svg" style="max-width:100%;"></a>
+    <a href="https://www.npmjs.com/package/shark-cleaner" rel="nofollow"><img src="https://img.shields.io/npm/l/shark-cleaner.svg?style=flat" style="max-width:100%;"></a>
+</p>
+
 ## 起源
 
 ![1584517625611.jpg](https://s3.qiufengh.com/blog/1584517625611.jpg)
