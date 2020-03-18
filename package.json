@@ -1,6 +1,6 @@
 {
   "name": "shark-cleaner",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "A cleaning tool to help you quickly clear cache garbage.",
   "main": "dist/fsSystem.js",
   "scripts": {
