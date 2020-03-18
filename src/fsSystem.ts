@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as loadPkg from 'load-json-file';
 import { PKG_NAME, NODE_MODULES, IGNORE_FILES } from './constant';
 import { byteConvert } from './shared';
-import * as del from 'del';
+import * as rimraf from 'rimraf';
 import * as events from 'events';
 
 interface ProjectInfo {
@@ -100,7 +100,7 @@ class FsSystem extends events.EventEmitter {
     this.emitDeleteStart();
     for (let i = 0; i < pathList.length; i++) {
       try {
-        await del([pathList[i]], { force: true });
+        rimraf.sync(pathList[i]);
         this.emitDeleteFile(pathList[i]);
       } catch (e) {
 
