@@ -31,6 +31,13 @@ shark
 
 ## 效果演示
 
+视频演示: https://s3.qiufengh.com/shark-cleaner/shark-cleaner.mp4
+
+![](https://s3.qiufengh.com/shark-cleaner/shark-init.jpg)
+
+![](https://s3.qiufengh.com/shark-cleaner/shark-scanner.jpg)
+
+![](https://s3.qiufengh.com/shark-cleaner/shark-computed.jpg)
 
 
 ## TODO
