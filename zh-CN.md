@@ -33,11 +33,11 @@ shark
 
 视频演示: https://s3.qiufengh.com/shark-cleaner/shark-cleaner.mp4
 
-![](https://s3.qiufengh.com/shark-cleaner/shark-init.jpg)
+<img src="https://s3.qiufengh.com/shark-cleaner/shark-init.jpg" width="300"/>
 
-![](https://s3.qiufengh.com/shark-cleaner/shark-scanner.jpg)
+<img src="https://s3.qiufengh.com/shark-cleaner/shark-scanner.jpg" width="300"/>
 
-![](https://s3.qiufengh.com/shark-cleaner/shark-computed.jpg)
+<img src="https://s3.qiufengh.com/shark-cleaner/shark-computed.jpg" width="300"/>
 
 
 ## TODO
