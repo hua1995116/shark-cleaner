@@ -4,7 +4,8 @@
   "description": "A cleaning tool to help you quickly clear cache garbage.",
   "main": "dist/fsSystem.js",
   "scripts": {
-    "build": "tsc && cd client && npm run build",
+    "build-ts": "tsc",
+    "build": "npm run build-ts && cd client && npm run build",
     "update": "auto-vers -t"
   },
   "keywords": [
@@ -28,6 +29,7 @@
   "dependencies": {
     "colors": "^1.4.0",
     "commander": "^5.0.0",
+    "home": "^2.0.0",
     "koa": "^2.11.0",
     "koa-send": "^5.0.0",
     "load-json-file": "^6.2.0",

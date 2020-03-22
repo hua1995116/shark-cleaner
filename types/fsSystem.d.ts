@@ -1,11 +1,13 @@
 /// <reference types="node" />
 import * as events from 'events';
+import { Parser, StaticRule } from './rules';
 interface ProjectInfo {
     path: string;
-    desc: string;
-    author: string;
     formatSize: string;
     size: number;
+    info?: Object;
+    computed: string;
+    type: string;
 }
 interface Options {
     path: string;
@@ -32,10 +34,8 @@ declare class FsSystem extends events.EventEmitter {
     run(): void;
     delete(pathList: any): Promise<void>;
     loopReadFile2(parPath: string): void;
-    isNodeProject(list: string[], pkgDir: string): Boolean;
-    isIncludePkg(list: any): any;
-    isIncludeNodeModules(list: any): any;
-    getPkgObj(pkgPath: any): any;
-    isNpmPkg(pkgDir: any): boolean;
+    loopStatic(staticList: StaticRule[]): void;
+    parseInfo(info: Parser, parPath: any): {};
+    judgeInclude(dirs: any, has: any): boolean;
 }
 export default FsSystem;

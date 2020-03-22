@@ -6,13 +6,16 @@ import { PKG_NAME, NODE_MODULES, IGNORE_FILES } from './constant';
 import { byteConvert } from './shared';
 import * as rimraf from 'rimraf';
 import * as events from 'events';
+import rules, { Parser, StaticRule } from './rules';
+import * as home from 'home';
 
 interface ProjectInfo {
   path: string;
-  desc: string;
-  author: string;
   formatSize: string;
   size: number;
+  info?: Object;
+  computed: string;
+  type: string;
 }
 
 interface Options {
@@ -72,7 +75,7 @@ class FsSystem extends events.EventEmitter {
     for (let i = 0; i < total; i++) {
       const item = this.projectTree[i];
       const itemPath = item.path;
-      item.size = fsUtils.fsizeSync(path.join(itemPath, NODE_MODULES));
+      item.size = fsUtils.fsizeSync(path.join(itemPath, item.computed));
       item.formatSize = byteConvert(item.size);
       this.emitComputed({
         current: i,
@@ -90,6 +93,7 @@ class FsSystem extends events.EventEmitter {
       return;
     }
     this.loopReadFile2(this.workPath);
+    this.loopStatic(rules.static);
     this.scannerCallback();
   }
   async delete(pathList) {
@@ -120,47 +124,86 @@ class FsSystem extends events.EventEmitter {
       console.error(e);
     }
     const strDir = dirs.map(item => item.name);
-    if (this.isNodeProject(strDir, parPath)) {
-      const pkgJSON = this.getPkgObj(path.join(parPath, PKG_NAME));
-      const projectInfo: ProjectInfo = {
-        path: parPath,
-        desc: pkgJSON.description || '',
-        author: JSON.stringify(pkgJSON.author || ''),
-        size: 0,
-        formatSize: ''
+    rules.recursive.map(item => {
+      if (this.judgeInclude(strDir, item.has)) {
+        const projectInfo: ProjectInfo = {
+          path: parPath,
+          computed: item.computed,
+          size: 0,
+          formatSize: '',
+          type: item.type
+        }
+        if (item.info) {
+          projectInfo.info = this.parseInfo(item.info, parPath);
+        }
+        this.projectTree.push(projectInfo);
       }
-      this.projectTree.push(projectInfo);
-    }
+    })
     dirs.forEach(item => {
       const curPath = path.join(parPath, item.name);
       if (item.isSymbolicLink()) {
         return;
       }
-      if (item.isDirectory() && !item.name.includes(NODE_MODULES) && !this.ignoreList.includes(item.name)) {
+      if (item.isDirectory() && !rules.ignore.includes(item.name) && !this.ignoreList.includes(item.name)) {
         this.loopReadFile2(curPath);
       }
     })
   }
-  isNodeProject(list: string[], pkgDir: string): Boolean {
-    // has package.json && is not npm pkg && include node_modules
-    return this.isIncludePkg(list) && this.isNpmPkg(pkgDir) && this.isIncludeNodeModules(list);
-  }
-  isIncludePkg(list) {
-    return list.includes(PKG_NAME);
-  }
-  isIncludeNodeModules(list) {
-    return list.includes(NODE_MODULES);
-  }
-  getPkgObj(pkgPath): any {
-    try {
-      return loadPkg.sync(pkgPath);
-    } catch (e) {
-      return {}
+  loopStatic(staticList: StaticRule[]) {
+    for (let i = 0; i < staticList.length; i++) {
+      const staticFile = staticList[i];
+      if (staticFile.computed === './') {
+        const projectInfo: ProjectInfo = {
+          path: home.resolve(staticFile.path),
+          computed: staticFile.computed,
+          size: 0,
+          formatSize: '',
+          type: staticFile.type
+        }
+        this.projectTree.push(projectInfo);
+      } else if (staticFile.computed === './**') {
+        const listPath = home.resolve(staticFile.path);
+        let dirs = [];
+        try {
+          dirs = fs.readdirSync(listPath, {
+            withFileTypes: true
+          });
+        } catch (e) {
+          console.error(e);
+        }
+        dirs.forEach(item => {
+          const curPath = path.join(listPath, item.name);
+          const projectInfo: ProjectInfo = {
+            path: curPath,
+            computed: './',
+            size: 0,
+            formatSize: '',
+            type: staticFile.type
+          }
+          this.projectTree.push(projectInfo);
+        })
+      }
     }
   }
-  isNpmPkg(pkgDir) {
-    const pkgJSON = this.getPkgObj(path.join(pkgDir, PKG_NAME));
-    return !pkgJSON._resolved;
+  parseInfo(info: Parser, parPath) {
+    let parseObj;
+    try {
+      parseObj = info.parse(path.join(parPath, info.file));
+    } catch {
+      parseObj = {};
+    }
+    return info.values.reduce((infos, item) => {
+      infos[item] = parseObj[item];
+      return infos;
+    }, {});
+  }
+  judgeInclude(dirs, has) {
+    let start = 0;
+    for (let i = 0; i < has.length; i++) {
+      if (dirs.includes(has[i])) start++;
+    }
+    if (start === has.length) return true;
+    return false;
   }
 }
 

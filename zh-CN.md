@@ -71,7 +71,7 @@ npm install
 
 node cli/index.js
 ```
-another bash
+打开另一个控制台
 
 ```bash
 cd client

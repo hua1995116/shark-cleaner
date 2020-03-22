@@ -17,6 +17,9 @@ export function byteConvert(bytes) {
 }
 
 export function join(root, path) {
+  if (path === './') {
+    return root;
+  }
   if (root.indexOf('/') > -1) {
     return root + `/${path}`;
   }
