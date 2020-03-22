@@ -77,7 +77,7 @@ class FsSystem extends events.EventEmitter {
     for (let i = 0; i < total; i++) {
       const item = this.projectTree[i];
       const itemPath = item.path;
-      item.size = fsUtils.fsizeSync(path.join(itemPath, item.computed));
+      item.size = this.computedSize(path.join(itemPath, item.computed));
       item.formatSize = byteConvert(item.size);
       this.emitComputed({
         current: i,
@@ -87,6 +87,9 @@ class FsSystem extends events.EventEmitter {
     }
     this.emitdDone();
     this.projectTree = [];
+  }
+  computedSize(curPath) {
+    return fsUtils.fsizeSync(curPath);
   }
   run() {
     if (!fs.existsSync(this.workPath)) {

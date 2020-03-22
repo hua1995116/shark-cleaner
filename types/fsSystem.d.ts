@@ -33,6 +33,7 @@ declare class FsSystem extends events.EventEmitter {
     emitDeleteDone(): void;
     emitErrorFile(): void;
     scannerCallback(): void;
+    computedSize(curPath: any): number;
     run(): void;
     delete(pathList: any): void;
     loopReadFile2(parPath: string): void;
