@@ -62,7 +62,6 @@ typings/
 .next
 dist
 .vscode
-package-lock.json
 test.js
 .cache
 client-dist
