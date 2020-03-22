@@ -13,7 +13,47 @@ import {
 import findIndex from "lodash/findIndex";
 import { join } from "./shared";
 // import Tip from './tip';
-
+window.list = [ { path: '/Users/huayifeng/my/test/antd/1zh16/select',
+computed: 'node_modules',
+size: 351996538,
+formatSize: '335.69 MB',
+type: 'node_modules',
+info: {} },
+{ path: '/Users/huayifeng/.npm',
+computed: './',
+size: 1191848032,
+formatSize: '1.11 GB',
+type: 'npm_cache' },
+{ path: '/Users/huayifeng/.nvm/versions/node/v10.10.0',
+computed: './',
+size: 259457061,
+formatSize: '247.44 MB',
+type: 'node_cache' },
+{ path: '/Users/huayifeng/.nvm/versions/node/v10.16.0',
+computed: './',
+size: 520124008,
+formatSize: '496.03 MB',
+type: 'node_cache' },
+{ path: '/Users/huayifeng/.nvm/versions/node/v12.16.0',
+computed: './',
+size: 76790390,
+formatSize: '73.23 MB',
+type: 'node_cache' },
+{ path: '/Users/huayifeng/.nvm/versions/node/v6.9.3',
+computed: './',
+size: 57371651,
+formatSize: '54.71 MB',
+type: 'node_cache' },
+{ path: '/Users/huayifeng/.nvm/versions/node/v8.5.0',
+computed: './',
+size: 1504749930,
+formatSize: '1.40 GB',
+type: 'node_cache' },
+{ path: '/Users/huayifeng/.nvm/versions/node/v8.9.0',
+computed: './',
+size: 112609829,
+formatSize: '107.39 MB',
+type: 'node_cache' } ]
 const logoList = [<SettingTwoTone />, <RestTwoTone />, <ExperimentTwoTone />, <ThunderboltTwoTone />]
 
 function conversionGroup(list) {
@@ -144,7 +184,7 @@ function Detail(props) {
       return;
     }
 
-    fileList[listIndex].checked = !fileList[listIndex].checked;
+    groupOrderList[listIndex].checked = !groupOrderList[listIndex].checked;
     const index = findIndex(checkedList, { path: item.path });
     if (index > -1) {
       checkedList.splice(index, 1);
@@ -157,7 +197,7 @@ function Detail(props) {
       setSelectSize(selectSize + item.size);
     }
     setCheckList(checkedList);
-    setList(fileList);
+    setList(groupOrderList);
     setLastIndex(listIndex);
   };
 
