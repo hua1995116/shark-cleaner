@@ -40,14 +40,15 @@ video demo: https://s3.qiufengh.com/shark-cleaner/shark-cleaner.mp4
 <img src="https://s3.qiufengh.com/shark-cleaner/shark-computed.jpg" width="300"/>
 
 
+## Features
+
+1. Support cleaning node_modules, nvm, npm cache
+
 ## TODO
 
-1. Support npm cache, yarn cache cleaning
-2. Support nvm cleaning
-3. electron client development
-4. More other language cache cleaning
-
-
+1. Support yarn cache cleanup
+2. electron client development
+3. More other language cache cleaning (such as go cache, pip cache)
 
 
 ## Cache List
@@ -60,7 +61,9 @@ video demo: https://s3.qiufengh.com/shark-cleaner/shark-cleaner.mp4
 |      | yarn         | MacOS: /Users//Library/Caches/yarn Windows: C:/Users//AppData/Local/Yarn/cache |                                          |
 
 
+## Need help
 
+Hope to provide the path of the mainstream language cache package (such as go, python, etc.)
 
 ## Contribution
 

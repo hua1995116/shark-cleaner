@@ -39,15 +39,16 @@ shark
 
 <img src="https://s3.qiufengh.com/shark-cleaner/shark-computed.jpg" width="300"/>
 
+## 功能
+
+1. 支持清理 node_modules、nvm、npm缓存
+
 
 ## TODO
 
-1. 支持 npm cache，yarn cache 的清理
-2. 支持 nvm 清理
-3. electron 客户端开发
-4. 更多其他的语言缓存的清理
-
-
+1. 支持 yarn cache 的清理
+2. electron 客户端开发
+3. 更多其他的语言缓存的清理（例如 go cache，pip cache）
 
 
 ## 缓存列表
@@ -59,8 +60,9 @@ shark
 |      | nvm          | ~/.nvm/versions/node                                         |                                          |
 |      | yarn         | MacOS: /Users//Library/Caches/yarn Windows: C:/Users//AppData/Local/Yarn/cache |                                          |
 
+## 需要帮助
 
-
+希望能提供主流语言缓存包的路径（例如 go、python 等）
 
 ## 贡献
 
