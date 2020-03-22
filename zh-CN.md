@@ -42,13 +42,14 @@ shark
 ## 功能
 
 1. 支持清理 node_modules、nvm、npm缓存
-
+2. 支持国际化
 
 ## TODO
 
 1. 支持 yarn cache 的清理
 2. electron 客户端开发
 3. 更多其他的语言缓存的清理（例如 go cache，pip cache）
+4. 单元测试
 
 
 ## 缓存列表

@@ -43,12 +43,14 @@ video demo: https://s3.qiufengh.com/shark-cleaner/shark-cleaner.mp4
 ## Features
 
 1. Support cleaning node_modules, nvm, npm cache
+2. Support i18n
 
 ## TODO
 
 1. Support yarn cache cleanup
 2. electron client development
 3. More other language cache cleaning (such as go cache, pip cache)
+4. Unit test
 
 
 ## Cache List
