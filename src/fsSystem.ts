@@ -19,8 +19,9 @@ interface ProjectInfo {
 }
 
 interface Options {
-  path: string,
-  ignore: string[]
+  path: string;
+  ignore?: string[];
+  static?: boolean;
 }
 
 class FsSystem extends events.EventEmitter {
@@ -28,10 +29,12 @@ class FsSystem extends events.EventEmitter {
   public projectTree: ProjectInfo[];
   public ignoreList: string[];
   private isRemove: boolean;
+  private isStatic: boolean;
   constructor(options?: Options) {
     super();
     this.workPath = options.path;
-    this.ignoreList = options.ignore.concat(IGNORE_FILES);
+    this.ignoreList = (typeof options.ignore) === undefined ? IGNORE_FILES : options.ignore.concat(IGNORE_FILES);
+    this.isStatic = (typeof options.static) === undefined ? true : options.static;
     this.projectTree = [];
     this.isRemove = false;
   }
@@ -45,7 +48,6 @@ class FsSystem extends events.EventEmitter {
 
   }
   emitFile(filename) {
-    console.log('filename', filename);
     this.emit('file', filename);
   }
   emitScanner() {
@@ -93,10 +95,12 @@ class FsSystem extends events.EventEmitter {
       return;
     }
     this.loopReadFile2(this.workPath);
-    this.loopStatic(rules.static);
+    if (this.isStatic) {
+      this.loopStatic(rules.static);
+    }
     this.scannerCallback();
   }
-  async delete(pathList) {
+  delete(pathList) {
     if (this.isRemove) {
       return;
     }

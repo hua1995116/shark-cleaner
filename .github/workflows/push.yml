@@ -1,0 +1,24 @@
+name: push
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-2016]
+        node-version: [10.10.x, 12.x, 13.9]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install, build, and test
+      run: |
+        npm ci --no-optional
+        npm run build-ts --if-present
+        npm test
+      env:
+        CI: true

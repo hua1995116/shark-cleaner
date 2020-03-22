@@ -280,7 +280,7 @@ function Detail(props) {
             <ul>
               {groupList[group].list.map(item => {
                 const name = item.path.split("/");
-                const desc = item.desc || "";
+                const desc = item.info ? item.info.description : "";
                 return (
                   <React.Fragment key={item.path}>
                     <li>
@@ -320,7 +320,7 @@ function Detail(props) {
                           title={renderDetail(
                             item.info && item.info.author,
                             item.path,
-                            item.info && item.info.desc
+                            item.info && item.info.description
                           )}
                         >
                           <InfoCircleTwoTone className="detail-list__info" />

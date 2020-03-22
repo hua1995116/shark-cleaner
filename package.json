@@ -4,6 +4,7 @@
   "description": "A cleaning tool to help you quickly clear cache garbage.",
   "main": "dist/fsSystem.js",
   "scripts": {
+    "test": "mocha",
     "build-ts": "tsc",
     "build": "npm run build-ts && cd client && npm run build",
     "update": "auto-vers -t"
@@ -44,6 +45,7 @@
     "@types/node": "^13.9.0",
     "@types/socket.io": "^2.1.4",
     "auto-vers": "^1.0.3",
+    "mocha": "^7.1.1",
     "typescript": "^3.8.3"
   },
   "engines": {

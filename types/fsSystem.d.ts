@@ -11,13 +11,15 @@ interface ProjectInfo {
 }
 interface Options {
     path: string;
-    ignore: string[];
+    ignore?: string[];
+    static?: boolean;
 }
 declare class FsSystem extends events.EventEmitter {
     workPath: string;
     projectTree: ProjectInfo[];
     ignoreList: string[];
     private isRemove;
+    private isStatic;
     constructor(options?: Options);
     abort(): void;
     setWorkPath(path: any): void;
@@ -32,7 +34,7 @@ declare class FsSystem extends events.EventEmitter {
     emitErrorFile(): void;
     scannerCallback(): void;
     run(): void;
-    delete(pathList: any): Promise<void>;
+    delete(pathList: any): void;
     loopReadFile2(parPath: string): void;
     loopStatic(staticList: StaticRule[]): void;
     parseInfo(info: Parser, parPath: any): {};

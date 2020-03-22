@@ -33,7 +33,7 @@ const rules: Rule = {
     info: {
       file: 'package.json',
       parse: loadPkg.sync,
-      values: ['desc', 'author']
+      values: ['description', 'author']
     },
     type: 'node_modules',
     time: 1000 * 60 * 60 * 24 * 2, // 2 months
