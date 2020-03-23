@@ -26,8 +26,14 @@ systemIntance.on('scannerDone', () => {
 systemIntance.on('delete-start', () => {
   process.send({type: 'delete-start'})
 })
-systemIntance.on('delete-file', (path) => {
-  process.send({type: 'delete-file', data: path})
+systemIntance.on('delete-file-start', (path) => {
+  process.send({type: 'delete-file-start', data: path})
+})
+systemIntance.on('delete-file-error', (path) => {
+  process.send({type: 'delete-file-error', data: path})
+})
+systemIntance.on('delete-file-done', (path) => {
+  process.send({type: 'delete-file-done', data: path})
 })
 systemIntance.on('delete-done', () => {
   process.send({type: 'delete-done'})

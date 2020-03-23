@@ -67,6 +67,10 @@ video demo: https://s3.qiufengh.com/shark-cleaner/shark-cleaner.mp4
 
 Hope to provide the path of the mainstream language cache package (such as go, python, etc.)
 
+## Thanks
+
+Animation Support(https://codepen.io/kevin_David_k/pen/eYNeQVY)
+
 ## Contribution
 
 ```bash

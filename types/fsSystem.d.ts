@@ -29,7 +29,7 @@ declare class FsSystem extends events.EventEmitter {
     emitdDone(): void;
     emitComputed(project: any): void;
     emitDeleteStart(): void;
-    emitDeleteFile(path: any): void;
+    emitDeleteFile(type: any, path: any): void;
     emitDeleteDone(): void;
     emitErrorFile(): void;
     scannerCallback(): void;

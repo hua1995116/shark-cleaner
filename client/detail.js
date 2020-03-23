@@ -13,47 +13,6 @@ import {
 import findIndex from "lodash/findIndex";
 import { join } from "./shared";
 // import Tip from './tip';
-window.list = [ { path: '/Users/huayifeng/my/test/antd/1zh16/select',
-computed: 'node_modules',
-size: 351996538,
-formatSize: '335.69 MB',
-type: 'node_modules',
-info: {} },
-{ path: '/Users/huayifeng/.npm',
-computed: './',
-size: 1191848032,
-formatSize: '1.11 GB',
-type: 'npm_cache' },
-{ path: '/Users/huayifeng/.nvm/versions/node/v10.10.0',
-computed: './',
-size: 259457061,
-formatSize: '247.44 MB',
-type: 'node_cache' },
-{ path: '/Users/huayifeng/.nvm/versions/node/v10.16.0',
-computed: './',
-size: 520124008,
-formatSize: '496.03 MB',
-type: 'node_cache' },
-{ path: '/Users/huayifeng/.nvm/versions/node/v12.16.0',
-computed: './',
-size: 76790390,
-formatSize: '73.23 MB',
-type: 'node_cache' },
-{ path: '/Users/huayifeng/.nvm/versions/node/v6.9.3',
-computed: './',
-size: 57371651,
-formatSize: '54.71 MB',
-type: 'node_cache' },
-{ path: '/Users/huayifeng/.nvm/versions/node/v8.5.0',
-computed: './',
-size: 1504749930,
-formatSize: '1.40 GB',
-type: 'node_cache' },
-{ path: '/Users/huayifeng/.nvm/versions/node/v8.9.0',
-computed: './',
-size: 112609829,
-formatSize: '107.39 MB',
-type: 'node_cache' } ]
 const logoList = [<SettingTwoTone />, <RestTwoTone />, <ExperimentTwoTone />, <ThunderboltTwoTone />]
 
 function conversionGroup(list) {
@@ -115,7 +74,7 @@ function Detail(props) {
     const deleteStart = () => {
       console.log("delete-start");
     };
-    const deleteFile = file => {
+    const deleteFileDone = file => {
       // set status
       const statusList = [...fileList];
       let reduceSize = 0;
@@ -136,12 +95,12 @@ function Detail(props) {
     };
     socket.on("delete-start", deleteStart);
 
-    socket.on("delete-file", deleteFile);
+    socket.on("delete-file-done", deleteFileDone);
 
     socket.on("delete-done", deleteDone);
     return () => {
       socket.off("delete-start", deleteStart);
-      socket.off("delete-file", deleteFile);
+      socket.off("delete-file-done", deleteFileDone);
       socket.off("delete-done", deleteDone);
     };
   }, [selectSize]);
@@ -232,7 +191,7 @@ function Detail(props) {
         const disabledList = [...fileList];
         disabledList.map(item => {
           const index = findIndex(checkedList, { path: item.path });
-          if (index) {
+          if (index > -1) {
             item.disabled = true;
             item.status = 1;
           }
@@ -280,7 +239,7 @@ function Detail(props) {
             <ul>
               {groupList[group].list.map(item => {
                 const name = item.path.split("/");
-                const desc = item.info ? item.info.description : "";
+                const desc = item.info ? item.info.description ? item.info.description : "" : "";
                 return (
                   <React.Fragment key={item.path}>
                     <li>

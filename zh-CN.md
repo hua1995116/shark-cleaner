@@ -65,6 +65,10 @@ shark
 
 希望能提供主流语言缓存包的路径（例如 go、python 等）
 
+## 鸣谢
+
+动画支持(https://codepen.io/kevin_David_k/pen/eYNeQVY)
+
 ## 贡献
 
 ```bash

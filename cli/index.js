@@ -41,5 +41,7 @@ if (program.ignore) {
 const runner = new Server(info);
 runner.run(async (e) => {
   console.log(`listening on port ${info.port}`);
-  await open(`http://localhost:${info.port}`);
+  if (process.env.NODE_ENV !== 'local') {
+    await open(`http://localhost:${info.port}`);
+  }
 });

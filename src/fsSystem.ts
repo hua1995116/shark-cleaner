@@ -33,8 +33,8 @@ class FsSystem extends events.EventEmitter {
   constructor(options?: Options) {
     super();
     this.workPath = options.path;
-    this.ignoreList = (typeof options.ignore) === undefined ? IGNORE_FILES : options.ignore.concat(IGNORE_FILES);
-    this.isStatic = (typeof options.static) === undefined ? true : options.static;
+    this.ignoreList = (typeof options.ignore) === 'undefined' ? IGNORE_FILES : options.ignore.concat(IGNORE_FILES);
+    this.isStatic = (typeof options.static) === 'undefined' ? true : options.static;
     this.projectTree = [];
     this.isRemove = false;
   }
@@ -62,8 +62,8 @@ class FsSystem extends events.EventEmitter {
   emitDeleteStart() {
     this.emit('delete-start');
   }
-  emitDeleteFile(path) {
-    this.emit('delete-file', path);
+  emitDeleteFile(type, path) {
+    this.emit(`delete-file-${type}`, path);
   }
   emitDeleteDone() {
     this.emit('delete-done');
@@ -111,10 +111,11 @@ class FsSystem extends events.EventEmitter {
     this.emitDeleteStart();
     for (let i = 0; i < pathList.length; i++) {
       try {
+        this.emitDeleteFile('start', pathList[i]);
         rimraf.sync(pathList[i]);
-        this.emitDeleteFile(pathList[i]);
+        this.emitDeleteFile('done', pathList[i]);
       } catch (e) {
-
+        this.emitDeleteFile('error', pathList[i]);
       }
     }
     this.isRemove = false;

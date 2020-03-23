@@ -64,10 +64,20 @@ class ClearNode {
           });
           break;
         }
-        case 'delete-file': {
+        case 'delete-file-start': {
+          const file = m.data;
+          console.log(file, 'is starting delete');
+          break;
+        }
+        case 'delete-file-error': {
+          const file = m.data;
+          console.log(file, 'delete error');
+          break;
+        }
+        case 'delete-file-done': {
           const file = m.data;
           sockets.forEach(item => {
-            item.emit('delete-file', file);
+            item.emit('delete-file-done', file);
           });
           break;
         }
