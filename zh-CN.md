@@ -24,7 +24,7 @@
 Node 版本大于等于 10.10.0
 
 ```bash
-npm install -g node-shark
+npm install -g shark-cleaner
 
 shark
 ```
