@@ -1,8 +1,9 @@
 {
   "name": "shark-cleaner",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A cleaning tool to help you quickly clear cache garbage.",
   "main": "dist/fsSystem.js",
+  "types": "dist/fsSystem.d.ts",
   "scripts": {
     "dev": "NODE_ENV=local node cli/index.js",
     "test": "mocha",

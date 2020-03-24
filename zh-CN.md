@@ -46,7 +46,7 @@ shark
 
 ## TODO
 
-1. 支持 yarn cache 的清理
+1. ~~支持 yarn cache 的清理~~
 2. electron 客户端开发
 3. 更多其他的语言缓存的清理（例如 go cache，pip cache）
 4. 单元测试
@@ -54,12 +54,12 @@ shark
 
 ## 缓存列表
 
-| 语言 | 缓存列表     | 目录                                                         | 相关库                                   |
-| ---- | ------------ | ------------------------------------------------------------ | ---------------------------------------- |
-| Node | npm          | ~/.npm                                                       | https://github.com/shinnn/npm-cache-path |
-|      | node_modules | $peoject/node_modules                                        |                                          |
-|      | nvm          | ~/.nvm/versions/node                                         |                                          |
-|      | yarn         | MacOS: /Users//Library/Caches/yarn Windows: C:/Users//AppData/Local/Yarn/cache |                                          |
+| 语言 | 缓存列表     | 目录Mac               | 目录Windows                     | 相关库                                   |
+| ---- | ------------ | --------------------- | ------------------------------- | ---------------------------------------- |
+| Node | npm          | ~/.npm                | $HOME/AppData/Roaming/npm-cache | https://github.com/shinnn/npm-cache-path |
+|      | node_modules | $peoject/node_modules | $peoject/node_modules           |                                          |
+|      | nvm          | ~/.nvm/versions/node  | $HOME/AppData/Roaming/nvm       |                                          |
+|      | yarn         | ~/Library/Caches/Yarn | $HOME/AppData/Local/Yarn/Cache  |                                          |
 
 ## 需要帮助
 

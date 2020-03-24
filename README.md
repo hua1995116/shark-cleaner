@@ -47,7 +47,7 @@ video demo: https://s3.qiufengh.com/shark-cleaner/shark-cleaner.mp4
 
 ## TODO
 
-1. Support yarn cache cleanup
+1. ~~Support yarn cache cleanup~~
 2. electron client development
 3. More other language cache cleaning (such as go cache, pip cache)
 4. Unit test
@@ -56,11 +56,11 @@ video demo: https://s3.qiufengh.com/shark-cleaner/shark-cleaner.mp4
 ## Cache List
 
 | Language | cache list    | directory                                                         | related                                   |
-| ---- | ------------ | ------------------------------------------------------------ | ---------------------------------------- |
-| Node | npm          | ~/.npm                                                       | https://github.com/shinnn/npm-cache-path |
-|      | node_modules | $peoject/node_modules                                        |                                          |
-|      | nvm          | ~/.nvm/versions/node                                         |                                          |
-|      | yarn         | MacOS: /Users//Library/Caches/yarn Windows: C:/Users//AppData/Local/Yarn/cache |                                          |
+| ---- | ------------ | --------------------- | ------------------------------- | ---------------------------------------- |
+| Node | npm          | ~/.npm                | $HOME/AppData/Roaming/npm-cache | https://github.com/shinnn/npm-cache-path |
+|      | node_modules | $peoject/node_modules | $peoject/node_modules           |                                          |
+|      | nvm          | ~/.nvm/versions/node  | $HOME/AppData/Roaming/nvm       |                                          |
+|      | yarn         | ~/Library/Caches/Yarn | $HOME/AppData/Local/Yarn/Cache  |                                          |
 
 
 ## Need help
