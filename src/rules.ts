@@ -55,6 +55,10 @@ const rules: Rule = {
     type: 'node_cache',
     computed: './**'
   }, {
+    path: platform === 'win32' ? path.join(home(), '.npminstall_tarball') : home.resolve('~/.npminstall_tarball'),
+    type: 'npm_cache',
+    computed: './'
+  }, {
     path: platform === 'win32' ? path.join(home(), 'AppData/Local/Yarn/Cache') : home.resolve('~/Library/Caches/Yarn'),
     type: 'yarn_cache',
     computed: './**'
