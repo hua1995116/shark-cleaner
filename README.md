@@ -55,12 +55,12 @@ video demo: https://s3.qiufengh.com/shark-cleaner/shark-cleaner.mp4
 
 ## Cache List
 
-| Language | cache list    | directory                                                         | related                                   |
-| ---- | ------------ | --------------------- | ------------------------------- | ---------------------------------------- |
-| Node | npm          | ~/.npm                | $HOME/AppData/Roaming/npm-cache | https://github.com/shinnn/npm-cache-path |
-|      | node_modules | $peoject/node_modules | $peoject/node_modules           |                                          |
-|      | nvm          | ~/.nvm/versions/node  | $HOME/AppData/Roaming/nvm       |                                          |
-|      | yarn         | ~/Library/Caches/Yarn | $HOME/AppData/Local/Yarn/Cache  |                                          |
+| Language | cache list     | Mac directory         |  Windows directory        | related                                   |
+| ---- | ------------ | ---------------------- | -------------------------------- | ---------------------------------------- |
+| Node | npm          | ~/.npm                 | \$HOME/AppData/Roaming/npm-cache | https://github.com/shinnn/npm-cache-path |
+|      | node_modules | \$peoject/node_modules | \$peoject/node_modules           |                                          |
+|      | nvm          | ~/.nvm/versions/node   | \$HOME/AppData/Roaming/nvm       |                                          |
+|      | yarn         | ~/Library/Caches/Yarn  | \$HOME/AppData/Local/Yarn/Cache  |                                          |
 
 
 ## Need help
