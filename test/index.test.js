@@ -8,7 +8,7 @@ describe("test scanner", () => {
   const systemIntance = new fsSystem({
     path: path.join(__dirname, "test-pkg"),
     ignore: [],
-    isStatic: false,
+    static: false,
   });
   // 启动一个 websocket服务器，然后等待连接来到，连接到来之后socket
 
