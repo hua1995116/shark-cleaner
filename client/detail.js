@@ -252,7 +252,7 @@ function Detail(props) {
                           }}
                         >
                           <span className="detail-list__name">
-                            {name[name.length - 1]}
+                            {name[name.length - 1] || name[name.length - 2]}
                           </span>
                           <span className="detail-list__desc">
                             {desc.length > 30

@@ -1,5 +1,8 @@
 import * as loadPkg from 'load-json-file';
-
+import * as os from 'os';
+import * as home from 'home';
+import * as path from 'path';
+import * as npmCachePath from 'npm-cache-path';
 export interface Parser {
   file: string;
   parse: Function;
@@ -26,6 +29,8 @@ interface Rule {
   ignore: string[],
 }
 
+const platform = os.platform();
+
 const rules: Rule = {
   recursive: [{
     has: ['node_modules', 'package.json'],
@@ -39,12 +44,19 @@ const rules: Rule = {
     time: 1000 * 60 * 60 * 24 * 2, // 2 months
   }],
   static: [{
-    path: '~/.npm',
+    // path: async () => {
+    //   return await npmCachePath();
+    // },
+    path: platform === 'win32' ? path.join(home(), 'AppData/Roaming/npm-cache') : home.resolve('~/.npm'),
     type: 'npm_cache',
     computed: './'
   }, {
-    path: '~/.nvm/versions/node',
+    path: platform === 'win32' ? path.join(home(), 'AppData/Roaming/nvm') : home.resolve('~/.nvm/versions/node'),
     type: 'node_cache',
+    computed: './**'
+  }, {
+    path: platform === 'win32' ? path.join(home(), 'AppData/Local/Yarn/Cache') : home.resolve('~/Library/Caches/Yarn'),
+    type: 'yarn_cache',
     computed: './**'
   }],
   ignore: []

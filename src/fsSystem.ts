@@ -7,7 +7,6 @@ import { byteConvert } from './shared';
 import * as rimraf from 'rimraf';
 import * as events from 'events';
 import rules, { Parser, StaticRule } from './rules';
-import * as home from 'home';
 
 interface ProjectInfo {
   path: string;
@@ -160,9 +159,12 @@ class FsSystem extends events.EventEmitter {
   loopStatic(staticList: StaticRule[]) {
     for (let i = 0; i < staticList.length; i++) {
       const staticFile = staticList[i];
+      if (!fs.existsSync(staticFile.path)) {
+        continue;
+      }
       if (staticFile.computed === './') {
         const projectInfo: ProjectInfo = {
-          path: home.resolve(staticFile.path),
+          path: staticFile.path,
           computed: staticFile.computed,
           size: 0,
           formatSize: '',
@@ -170,7 +172,7 @@ class FsSystem extends events.EventEmitter {
         }
         this.projectTree.push(projectInfo);
       } else if (staticFile.computed === './**') {
-        const listPath = home.resolve(staticFile.path);
+        const listPath = staticFile.path;
         let dirs = [];
         try {
           dirs = fs.readdirSync(listPath, {
@@ -180,15 +182,18 @@ class FsSystem extends events.EventEmitter {
           console.error(e);
         }
         dirs.forEach(item => {
-          const curPath = path.join(listPath, item.name);
-          const projectInfo: ProjectInfo = {
-            path: curPath,
-            computed: './',
-            size: 0,
-            formatSize: '',
-            type: staticFile.type
+          // 只有是目录才添加
+          if (item.isDirectory()) {
+            const curPath = path.join(listPath, item.name);
+            const projectInfo: ProjectInfo = {
+              path: curPath,
+              computed: './',
+              size: 0,
+              formatSize: '',
+              type: staticFile.type
+            }
+            this.projectTree.push(projectInfo);
           }
-          this.projectTree.push(projectInfo);
         })
       }
     }
