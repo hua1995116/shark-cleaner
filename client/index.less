@@ -33,6 +33,22 @@ ul, p {
   float: right;
 }
 
+.header-wechat {
+  position: relative;
+  .wechat-group {
+    top: 50px;
+    right: 0;
+    position: absolute;
+    width: 200px;
+    display: none;
+  }
+  &:hover {
+    .wechat-group {
+      display: block;
+    }
+  }
+}
+
 .bottom {
   height: 60px;
   text-align: center;

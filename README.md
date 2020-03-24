@@ -91,3 +91,11 @@ npm run dev
 ```
 
 Open: http://localhost:1234/
+
+## License
+
+Copyright (c) 2020 蓝色的秋风 (hua1995116) Licensed under the MIT license.
+
+## Wechat Group
+
+<img src="https://s3.qiufengh.com/blog/WechatIMG713.jpeg" width="300"/>
