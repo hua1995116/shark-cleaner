@@ -6,6 +6,7 @@ import { PKG_NAME, NODE_MODULES, IGNORE_FILES } from './constant';
 import { byteConvert } from './shared';
 import * as rimraf from 'rimraf';
 import * as events from 'events';
+import * as multimatch from 'multimatch';
 import rules, { Parser, StaticRule } from './rules';
 
 interface ProjectInfo {
@@ -151,7 +152,7 @@ class FsSystem extends events.EventEmitter {
       if (item.isSymbolicLink()) {
         return;
       }
-      if (item.isDirectory() && !rules.ignore.includes(item.name) && !this.ignoreList.includes(item.name)) {
+      if (item.isDirectory() && !rules.ignore.includes(item.name) && multimatch([item.name], this.ignoreList).length === 0) {
         this.loopReadFile2(curPath);
       }
     })

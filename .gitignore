@@ -63,5 +63,6 @@ typings/
 dist
 .vscode
 test.js
+test.ts
 .cache
 client-dist
