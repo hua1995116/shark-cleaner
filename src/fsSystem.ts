@@ -8,6 +8,7 @@ import * as rimraf from 'rimraf';
 import * as events from 'events';
 import * as multimatch from 'multimatch';
 import rules, { Parser, StaticRule } from './rules';
+import { lastAccess } from './analysis';
 
 interface ProjectInfo {
   path: string;
@@ -16,6 +17,8 @@ interface ProjectInfo {
   info?: Object;
   computed: string;
   type: string;
+  lastATime?: number;
+  lastFile?: string;
 }
 
 interface Options {
@@ -79,6 +82,11 @@ class FsSystem extends events.EventEmitter {
       const itemPath = item.path;
       item.size = this.computedSize(path.join(itemPath, item.computed));
       item.formatSize = byteConvert(item.size);
+      const [lastAtime, lastFile] = lastAccess(itemPath, {
+        ignore: [...(rules.ignore), ...(this.ignoreList)]
+      });
+      item.lastATime = lastAtime;
+      item.lastFile = lastFile;
       this.emitComputed({
         current: i,
         path: itemPath,

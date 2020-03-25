@@ -8,6 +8,8 @@ interface ProjectInfo {
     info?: Object;
     computed: string;
     type: string;
+    lastATime?: number;
+    lastFile?: string;
 }
 interface Options {
     path: string;
