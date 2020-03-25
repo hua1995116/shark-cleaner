@@ -46,7 +46,7 @@ function Detail(props) {
       status: 0, // 0 - normal 1 - loading 2 - finish
       disabled: false
     };
-    if (item.size > 1024 * 1024 * 50) {
+    if (Date.now() - item.lastATime > 7 * 24 * 60 * 60 * 1000) {
       initChecked.push({
         path: item.path,
         computed: item.computed
