@@ -12,5 +12,9 @@
   "already_select": "Already selected",
   "developing": "Stay tuned during development",
   "select_one": "Select at least one file for cleaning",
-  "select_confirm": "Confirm to clean the following files?"
+  "select_confirm": "Confirm to clean the following files?",
+  "cleaning": "Cleaning up",
+  "clean_done": "Clean up",
+  "all": "Total",
+  "lastAtime": " used"
 }

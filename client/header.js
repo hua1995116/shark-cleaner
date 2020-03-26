@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import i18n from "./i18n";
+import { render } from 'timeago.js';
 
 function Haeder() {
 
   const handleOnClick = () => {
+    const nodes = document.querySelectorAll('.detail-list__timeago');
     if (i18n.languages[0] === 'zh-CN') {
       i18n.changeLanguage('en-US');
       localStorage.setItem('shark-language', 'en-US');
+      render(nodes, 'en_US');
       return;
     }
+    render(nodes, 'zh_CN');
     i18n.changeLanguage('zh-CN');
     localStorage.setItem('shark-language', 'zh-CN');
   }

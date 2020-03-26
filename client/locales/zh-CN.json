@@ -12,5 +12,9 @@
   "already_select": "已经选择",
   "developing": "开发中敬请期待",
   "select_one": "至少选中一个文件进行清理",
-  "select_confirm": "确认要清理以下文件?"
+  "select_confirm": "确认要清理以下文件?",
+  "cleaning": "正在清理",
+  "clean_done": "清理完成",
+  "all": "共",
+  "lastAtime": "使用"
 }
