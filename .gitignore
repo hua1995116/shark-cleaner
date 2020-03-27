@@ -66,3 +66,4 @@ test.js
 test.ts
 .cache
 client-dist
+analysis_test.ts
