@@ -24,6 +24,8 @@ describe("test scanner", () => {
           size,
           formatSize: byteConvert(size),
           type: "node_modules",
+          lastATime: 0,
+          lastFile: "",
           info: {
             author:
               "hua1995116 <qiufneghyf@gmail.com> (https://github.com/hua1995116)",
@@ -33,6 +35,8 @@ describe("test scanner", () => {
         {
           path: path.join(__dirname, "test-pkg", "b"),
           computed: "node_modules",
+          lastATime: 0,
+          lastFile: "",
           size,
           formatSize: byteConvert(size),
           type: "node_modules",
