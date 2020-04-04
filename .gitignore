@@ -67,3 +67,4 @@ test.ts
 .cache
 client-dist
 analysis_test.ts
+render_process

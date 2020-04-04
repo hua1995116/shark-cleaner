@@ -9,10 +9,14 @@ function Haeder() {
     if (i18n.languages[0] === 'zh-CN') {
       i18n.changeLanguage('en-US');
       localStorage.setItem('shark-language', 'en-US');
-      render(nodes, 'en_US');
+      if ([...nodes].length > 0) {
+        render(nodes, 'en_US');
+      }
       return;
     }
-    render(nodes, 'zh_CN');
+    if ([...nodes].length > 0) {
+      render(nodes, 'zh_CN');
+    }
     i18n.changeLanguage('zh-CN');
     localStorage.setItem('shark-language', 'zh-CN');
   }

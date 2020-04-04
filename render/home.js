@@ -39,6 +39,7 @@ function Home(props) {
     socket.on("done", list => {
       console.log('done');
       setProgress(100);
+      console.log(list);
       window.list = list;
       location.href = '#/detail';
     });

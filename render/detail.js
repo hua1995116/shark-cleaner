@@ -268,7 +268,7 @@ function Detail(props) {
                           {
                             item.lastATime ? (
                               <>
-                                <span className="detail-list__timeago" datetime={item.lastATime}>{format(item.lastATime, i18n.languages[0].replace('-', '_'))}</span>
+                                <span className="detail-list__timeago" dateTime={item.lastATime}>{format(item.lastATime, i18n.languages[0].replace('-', '_'))}</span>
                                 {t("lastAtime")}
                               </>
                             ) : ""

@@ -5,7 +5,8 @@ import "./i18n";
 import "normalize.css/normalize.css";
 import Home from "./home";
 import Detail from "./detail";
-import io from "socket.io-client";
+// import io from "socket.io-client";
+import io from './adapter';
 import Header from './header';
 import Bottom from './bottom';
 
@@ -26,7 +27,7 @@ function App() {
     };
   }, []);
   return (
-    <>
+    <React.Fragment>
       <Header></Header>
       <Switch>
         <Route path="/" component={() => <Home socket={socket} />} exact />
@@ -37,7 +38,7 @@ function App() {
         />
       </Switch>
       <Bottom></Bottom>
-    </>
+    </React.Fragment>
   );
 }
 
