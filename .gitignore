@@ -68,3 +68,4 @@ test.ts
 client-dist
 analysis_test.ts
 render_process
+electron

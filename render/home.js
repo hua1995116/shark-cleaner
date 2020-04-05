@@ -17,39 +17,60 @@ function Home(props) {
   const [cache, setCache] = useState([]);
   const [progress, setProgress] = useState(0);
   useEffect(() => {
-    socket.on("connect", () => {
+    const connectListener = () => {
       console.log('connected');
-    });
+    };
 
-    socket.on("file", file => {
+    const fileListener = file => {
       setCache(cache.concat(file));
-    });
+    };
 
-    socket.on("scannerDone", () => {
+    const scannerDoneListener = () => {
       console.log('scannerDone');
       setComputed(true);
       setProgress(50);
-    });
+    }
 
-    socket.on("computed", file => {
+    const computedListener = file => {
       const tempPagoress = 50 + (file.current / file.total) * 50;
       setProgress(tempPagoress);
-    });
+    }
 
-    socket.on("done", list => {
+    const doneListener = list => {
       console.log('done');
       setProgress(100);
       console.log(list);
       window.list = list;
       location.href = '#/detail';
-    });
+    }
 
-    socket.on("file-error", () => {
+    const fileErrorListener = () => {
       message.warning(t('file_error'));
       setTimeout(() => {
         location.href = '/';
       }, 1500);
-    })
+    }
+
+    socket.on("connect", connectListener);
+
+    socket.on("file", fileListener);
+
+    socket.on("scannerDone", scannerDoneListener);
+
+    socket.on("computed", computedListener);
+
+    socket.on("done", doneListener);
+
+    socket.on("file-error", fileErrorListener);
+
+    return () => {
+      socket.off("connect", connectListener);
+      socket.off("file", fileListener);
+      socket.off("scannerDone", scannerDoneListener);
+      socket.off("computed", computedListener);
+      socket.off("done", doneListener);
+      socket.off("file-error", fileErrorListener);
+    }
   }, []);
 
   useEffect(() => {

@@ -9,7 +9,8 @@ const os = require('os');
 const info = {
   path: os.homedir(),
   ignore: [],
-  port: 8082
+  port: 8082,
+  static: false
 };
 
 program

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { byteConvert } from "./shared";
+import { Link } from 'react-router-dom'
 import i18n from "./i18n";
 import { Checkbox, Tooltip, Button, message, Modal } from "antd";
 import {
@@ -215,9 +216,11 @@ function Detail(props) {
           <span>
             {t("total_cache")} {total}
           </span>
-          <Button size={"small"} onClick={() => (location.href = "/")}>
-            {t("back")}
-          </Button>
+          <Link to='/'>
+            <Button size={"small"}>
+              {t("back")}
+            </Button>
+          </Link>
           <br />
           <span className="detail-title__select">
             {t("already_select")}

@@ -6,8 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { webpackConfig } = require('./base');
 const getDefaultModules = require('./webpack-loader');
 
-console.log(getDefaultModules());
-
 
 const config = Object.assign({}, webpackConfig, {
   entry: {
